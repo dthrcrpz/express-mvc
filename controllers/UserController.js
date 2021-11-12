@@ -36,8 +36,32 @@ exports.register = (req, res) => {
     })
 }
 
-exports.login = (req, res) => {
-    res.send('hahga')
+exports.login = async (req, res) => {
+    let user = await User.findOne({
+        where: {
+            email: req.body.email
+        }
+    })
+
+    if (!user) {
+        res.send({
+            errors: [
+                { message: 'User not found' }
+            ]
+        }, 404)
+        return
+    }
+    
+    if (!bcrypt.compareSync(req.body.password, user.password)) {
+        res.send({
+            errors: [
+                { message: 'Wrong password. Please try again.' }
+            ]
+        }, 403)
+        return
+    }
+
+    
 }
 
 /* additional functions */
