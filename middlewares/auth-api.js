@@ -1,8 +1,6 @@
 module.exports = (req, res, next) => {
     let authHeader = req.get('Authorization')
     let token = (authHeader.split(' '))[1]
-    res.send(process.env.APPLICATION_KEY)
-    return
     next()
     // res.send({
     //     errors: [

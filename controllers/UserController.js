@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 exports.index = (req, res) => {
     User.findAll().then(users => {
@@ -60,9 +61,25 @@ exports.login = async (req, res) => {
         }, 403)
         return
     }
+
+    let token = createToken(user)
+
+    res.send({
+        token: token
+    })
 }
 
 /* additional functions */
+function createToken (user) {
+    let payload = {
+        user_id: user.id,
+        email: user.email
+    }
+    let token = jwt.sign(payload, process.env.APPLICATION_KEY)
+
+    return token
+}
+
 function validatePassword (req) {
     let valid = true
     let message = ''
