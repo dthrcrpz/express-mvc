@@ -69,13 +69,19 @@ exports.login = async (req, res) => {
     })
 }
 
+exports.user = (req, res) => {
+    res.send('hehe user eto')
+}
+
 /* additional functions */
 function createToken (user) {
     let payload = {
         user_id: user.id,
         email: user.email
     }
-    let token = jwt.sign(payload, process.env.APPLICATION_KEY)
+    let token = jwt.sign(payload, process.env.APPLICATION_KEY, {
+        expiresIn: 604800
+    })
 
     return token
 }

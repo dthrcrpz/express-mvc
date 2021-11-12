@@ -12,6 +12,7 @@ const UserController = require('../controllers/UserController')
 router.get('/', (req, res) => res.send('Nothing to do here'))
 
 /* users */
+router.get('/user', AuthAPI, UserController.user)
 router.post('/users/register', UserController.register)
 router.post('/users/login', UserController.login)
 
