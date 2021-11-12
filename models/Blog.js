@@ -1,16 +1,21 @@
-const { sequelize, Sequelize } = require("./Index");
+const { sequelize, Model, DataTypes } = require("./Index");
 
-const Model = sequelize.define('blogs', {
+class Blog extends Model {}
+
+Blog.init({
     title: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     body: {
-        type: Sequelize.TEXT('long'),
+        type: DataTypes.TEXT('long'),
         allowNull: false
     }
+}, {
+    sequelize,
+    modelName: 'blogs'
 })
 
-Model.sync({ alter: true })
+Blog.sync({ alter: true })
 
-module.exports = Model
+module.exports = Blog

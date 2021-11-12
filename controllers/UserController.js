@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
         return
     }
 
-    let token = createToken(user)
+    let token = user.createToken()
 
     res.send({
         token: token
@@ -75,19 +75,11 @@ exports.user = (req, res) => {
     })
 }
 
-/* additional functions */
-function createToken (user) {
-    let payload = {
-        user_id: user.id,
-        email: user.email
-    }
-    let token = jwt.sign(payload, process.env.APPLICATION_KEY, {
-        expiresIn: 604800
-    })
-
-    return token
+exports.logout = (req, res) => {
+    res.send(req.user)
 }
 
+/* additional functions */
 function validatePassword (req) {
     let valid = true
     let message = ''
