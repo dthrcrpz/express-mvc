@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
+router.use('/docs', swaggerUi.serve)
+router.get('/docs', swaggerUi.setup(swaggerDocument))
+
 /* import middlewares */
 const AuthAPI = require('../middlewares/auth-api')
 

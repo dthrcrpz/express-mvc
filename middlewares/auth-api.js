@@ -3,7 +3,18 @@ const User = require("../models/User")
 
 module.exports = (req, res, next) => {
     let authHeader = req.get('Authorization')
+
+    if (!authHeader) {
+        res.send({
+            errors: [
+                'Invalid token'
+            ]
+        }, 401)
+        return
+    }
+
     let token = (authHeader.split(' '))[1]
+    
     try {
         let decodedToken = jwt.verify(token, process.env.APPLICATION_KEY)
         User.findOne({
