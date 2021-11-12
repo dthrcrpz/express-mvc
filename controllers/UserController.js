@@ -76,7 +76,7 @@ exports.user = (req, res) => {
 }
 
 exports.logout = (req, res) => {
-    res.send(req.user)
+    res.send(req.user.blogs)
 }
 
 /* additional functions */

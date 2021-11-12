@@ -50,4 +50,9 @@ User.init({
 
 User.sync({ alter: true })
 
+User.hasMany(require('./Blog'), {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+
 module.exports = User

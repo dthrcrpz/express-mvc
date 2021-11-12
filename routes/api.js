@@ -19,6 +19,6 @@ router.post('/users/logout', Auth, UserController.logout)
 
 /* blogs */
 router.get('/blogs', Auth, BlogController.index)
-router.post('/blogs', BlogController.store)
+router.post('/blogs', Auth, BlogController.store)
 
 module.exports = router
