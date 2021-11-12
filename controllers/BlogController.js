@@ -1,12 +1,12 @@
 const Blog = require('../models/Blog')
 
 exports.index = (req, res) => {
-    let blogs = Blog.findAll().then(data => {
+    Blog.findAll().then(blogs => {
         res.send({
-            blogs: data
+            blogs: blogs
         })
     }).catch(err => {
-        res.send(err)
+        res.send(err, 403)
     })
 }
 
@@ -14,9 +14,9 @@ exports.store = (req, res) => {
     Blog.create({
         'title': req.body.title,
         'body': req.body.body,
-    }).then(data => {
-        res.send(data)
+    }).then(blog => {
+        res.send(blog)
     }).catch(err => {
-        res.send(err)
+        res.send(err, 403)
     })
 }
