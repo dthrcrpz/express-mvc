@@ -70,7 +70,9 @@ exports.login = async (req, res) => {
 }
 
 exports.user = (req, res) => {
-    res.send('hehe user eto')
+    res.send({
+        user: req.user
+    })
 }
 
 /* additional functions */

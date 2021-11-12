@@ -9,8 +9,12 @@ module.exports = (req, res, next) => {
         User.findOne({
             where: {
                 id: decodedToken.user_id
+            },
+            attributes: {
+                exclude: ['password']
             }
         }).then(user => {
+            req.user = user
             next()
         })
     } catch (error) {
@@ -19,18 +23,6 @@ module.exports = (req, res, next) => {
                 'Your session has expired'
             ]   
         }, 401)
+        return
     }
-    return
-    next()
-    // res.send({
-    //     errors: [
-    //         { message: 'Invalid token. Who are you?' }
-    //     ]
-    // }, 401)
-    // return
-    // throw new Error({
-    //     errors: [
-    //         { message: 'Invalid token. Who are you?' }
-    //     ]
-    // })
 }
