@@ -60,8 +60,6 @@ exports.login = async (req, res) => {
         }, 403)
         return
     }
-
-    
 }
 
 /* additional functions */
