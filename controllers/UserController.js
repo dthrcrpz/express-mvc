@@ -75,8 +75,9 @@ exports.user = (req, res) => {
     })
 }
 
-exports.logout = (req, res) => {
-    res.send(req.user.blogs)
+exports.logout = async (req, res) => {
+    let blogs = await req.user.getBlogs()
+    res.send(blogs)
 }
 
 /* additional functions */

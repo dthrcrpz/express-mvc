@@ -1,4 +1,5 @@
 const { sequelize, Model, DataTypes } = require("./Index")
+const User = require('./User')
 
 class Blog extends Model {}
 
@@ -24,8 +25,6 @@ Blog.init({
     modelName: 'blogs'
 })
 
-Blog.sync({ alter: true })
-
-Blog.belongsTo(require('./User'))
+// Blog.sync({ alter: true })
 
 module.exports = Blog

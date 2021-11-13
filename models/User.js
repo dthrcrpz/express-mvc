@@ -1,5 +1,6 @@
 const { sequelize, Model, DataTypes } = require("./Index")
 const jwt = require('jsonwebtoken')
+const Blog = require('./Blog')
 
 class User extends Model {
     createToken () {
@@ -48,11 +49,13 @@ User.init({
     modelName: 'users'
 })
 
-User.sync({ alter: true })
+// User.sync({ alter: true })
 
-User.hasMany(require('./Blog'), {
+User.hasMany(Blog, {
     onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
+    onUpdate: 'CASCADE',
+    as: 'blogs',
+    foreignKey: 'user_id'
 })
 
 module.exports = User
