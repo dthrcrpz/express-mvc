@@ -20,7 +20,7 @@ class User extends Model {
         AccessToken.create({
             user_id: this.id,
             token_id: token_id,
-            revoked: 0,
+            revoked: false,
             expires_at: moment().add(604800, 's').format('YYYY-MM-DD HH:mm:ss.SSS')
         })
     

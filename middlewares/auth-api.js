@@ -21,10 +21,12 @@ module.exports = (req, res, next) => {
         User.findOne({
             include: [
                 {
-                    as: 'access_tokens',
                     model: AccessToken,
+                    as: 'access_tokens',
+                    revoked: true,
                     where: {
-                        token_id: token_id
+                        token_id: decodedToken.token_id,
+                        revoked: false
                     }
                 }
             ],
@@ -32,6 +34,15 @@ module.exports = (req, res, next) => {
                 exclude: ['password']
             }
         }).then(user => {
+            if (user == null) {
+                res.send({
+                    errors: [
+                        'Your session has expired'
+                    ]   
+                }, 401)
+                return
+            }
+            
             req.user = user
             next()
         })
