@@ -27,6 +27,6 @@ AccessToken.init({
     modelName: 'access_tokens'
 })
 
-AccessToken.sync({ alter: true })
+// AccessToken.sync({ alter: true })
 
 module.exports = AccessToken

@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+const AccessToken = require("../models/AccessToken")
 const User = require("../models/User")
 
 module.exports = (req, res, next) => {
@@ -18,9 +19,15 @@ module.exports = (req, res, next) => {
     try {
         let decodedToken = jwt.verify(token, process.env.APPLICATION_KEY)
         User.findOne({
-            where: {
-                id: decodedToken.user_id
-            },
+            include: [
+                {
+                    as: 'access_tokens',
+                    model: AccessToken,
+                    where: {
+                        token_id: token_id
+                    }
+                }
+            ],
             attributes: {
                 exclude: ['password']
             }
