@@ -1,9 +1,9 @@
 const { sequelize, Model, DataTypes } = require("./Index")
 const jwt = require('jsonwebtoken')
 const Blog = require('./Blog')
-const AccessToken = require("./AccessToken")
 const randomstring = require('randomstring')
 const moment = require('moment')
+const AccessToken = require("./AccessToken")
 
 class User extends Model {
     createToken () {

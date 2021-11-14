@@ -1,6 +1,14 @@
 const { sequelize, Model, DataTypes } = require("./Index")
 
-class AccessToken extends Model {}
+class AccessToken extends Model {
+    revoke () {
+        this.update({
+            revoked: true
+        })
+
+        return `Access token revoked`
+    }
+}
 
 AccessToken.init({
     user_id: {
