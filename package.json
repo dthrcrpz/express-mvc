@@ -16,6 +16,9 @@
     "url": "https://github.com/dthrcrpz/express-practice/issues"
   },
   "homepage": "https://github.com/dthrcrpz/express-practice#readme",
+  "devDependencies": {
+    "ansi-regex": ">=5.0.1"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
