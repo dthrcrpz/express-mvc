@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const path = require('path')
+const { views } = require('../services/services')
 
 /* import middlewares */
 const Auth = require('../middlewares/auth-api')
@@ -23,9 +23,5 @@ router.post('/users/logout', Auth, UserController.logout)
 /* blogs */
 router.get('/blogs', Auth, BlogController.index)
 router.post('/blogs', Auth, BlogController.store)
-
-function views (directory) {
-    return path.join(__dirname, directory)
-}
 
 module.exports = router
